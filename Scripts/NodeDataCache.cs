@@ -24,6 +24,7 @@ namespace XNode {
 
         /// <summary> Update static ports and dynamic ports managed by DynamicPortLists to reflect class fields. </summary>
         public static void UpdatePorts(Node node, Dictionary<string, NodePort> ports) {
+#if UNITY_EDITOR
             if (!Initialized) BuildCache();
 
             Dictionary<string, List<NodePort>> removedPorts = new Dictionary<string, List<NodePort>>();
@@ -102,6 +103,7 @@ namespace XNode {
                 listPort.connectionType = backingPort.connectionType;
                 listPort.typeConstraint = backingPort.typeConstraint;
             }
+#endif
         }
 
         /// <summary>
