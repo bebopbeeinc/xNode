@@ -56,7 +56,7 @@ namespace XNodeEditor {
 			DrawDefaultInspector();
         }
 
-        private void OnEnable() {
+        protected virtual void OnEnable() {
             sceneGraph = target as SceneGraph;
             Type sceneGraphType = sceneGraph.GetType();
             if (sceneGraphType == typeof(SceneGraph)) {
@@ -69,7 +69,7 @@ namespace XNodeEditor {
             }
         }
 
-        public void CreateGraph(Type type) {
+        public virtual void CreateGraph(Type type) {
             Undo.RecordObject(sceneGraph, "Create graph");
             sceneGraph.graph = ScriptableObject.CreateInstance(type) as NodeGraph;
             sceneGraph.graph.name = sceneGraph.name + "-graph";
