@@ -337,7 +337,7 @@ namespace XNodeEditor {
             Color col = GUI.color;
             foreach (XNode.Node node in graph.nodes) {
                 //If a null node is found, return. This can happen if the nodes associated script is deleted. It is currently not possible in Unity to delete a null asset.
-                if (node == null) continue;
+                if (node == null || ShouldBeCulled(node)) continue;
 
                 // Draw full connections and output > reroute
                 foreach (XNode.NodePort output in node.Outputs) {
