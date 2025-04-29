@@ -337,7 +337,7 @@ namespace XNodeEditor {
             Color col = GUI.color;
             foreach (XNode.Node node in graph.nodes) {
                 //If a null node is found, return. This can happen if the nodes associated script is deleted. It is currently not possible in Unity to delete a null asset.
-                if (node == null || ShouldBeCulled(node)) continue;
+                if (node == null) continue;
 
                 // Draw full connections and output > reroute
                 foreach (XNode.NodePort output in node.Outputs) {
@@ -350,6 +350,7 @@ namespace XNodeEditor {
 
                     for (int k = 0; k < output.ConnectionCount; k++) {
                         XNode.NodePort input = output.GetConnection(k);
+                        if (ShouldBeCulled(node) && ShouldBeCulled(input.node)) continue; // If the node is culled, don't draw the connection (it will be culled anyway)'
 
                         Gradient noodleGradient = graphEditor.GetNoodleGradient(output, input);
                         float noodleThickness = graphEditor.GetNoodleThickness(output, input);
